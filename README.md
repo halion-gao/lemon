@@ -53,6 +53,22 @@ flutter build web
 ```
 編譯完成後，請將 `build/web/` 資料夾內的所有檔案上傳至您的網頁代管空間（例如 Firebase Hosting, Github Pages, Netlify 等）。
 
+### 🐳 Docker 容器化與部署
+專案內已提供 [Dockerfile](file:///Users/gaoyouhan/Downloads/vroom_final/Dockerfile)，您可透過 Docker 將專案打包成網頁伺服器，並快速部署至雲端虛擬機 (VM)：
+
+1. **打包 Docker 映像檔**：
+   ```bash
+   docker build -t halion0329/lemon:latest .
+   ```
+2. **推送至 Docker Hub**：
+   ```bash
+   docker push halion0329/lemon:latest
+   ```
+3. **在目標虛擬主機上部署並啟動**：
+   ```bash
+   docker run -d -p 80:80 --name lemon halion0329/lemon:latest
+   ```
+
 ### ⚠️ Firebase Web 設定步驟
 網頁版需要特定的 Web 端 SDK 設定。
 1. 開啟 [Firebase Console](https://console.firebase.google.com/)。
