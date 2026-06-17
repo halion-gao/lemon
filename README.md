@@ -69,8 +69,19 @@ flutter build web
    docker run -d -p 80:80 --name lemon halion0329/lemon:latest
    ```
 
+### ☁️ AWS ECS (Elastic Container Service) 部署
+專案已打包成 Docker 映像檔並推送至 Docker Hub。您可以在 AWS ECS 服務（如 Fargate）中直接進行無伺服器容器託管部署：
+
+1. **容器映像檔來源 (Image URL)**：
+   ```text
+   docker.io/halion0329/lemon:latest
+   ```
+2. **重要連接埠 (Port) 設定**：
+   * **容器連接埠 (Container Port)**：請務必將 Container Port 設定為 **`80`** (以對應 Dockerfile 中的 Nginx Port)。
+   * **負載平衡器 (ALB)**：設定 ALB 監聽器將流量導向 ECS 容器的 Port 80，以確保網頁能正常被外部存取。
+
 ### ☁️ Google Cloud Run 部署
-專案支援直接部署至 Google Cloud Run (無伺服器託管環境)。當您的 GCP 帳戶完成帳單（Billing）啟用與入帳後，可執行以下指令進行一鍵部署：
+專案亦支援直接部署至 Google Cloud Run。當您的 GCP 帳戶完成帳單（Billing）啟用與入帳後，可執行以下指令進行一鍵部署：
 
 1. **確認已切換至目標專案**：
    ```bash
@@ -80,7 +91,6 @@ flutter build web
    ```bash
    gcloud run deploy lemon --source . --region asia-east1 --port 80 --allow-unauthenticated
    ```
-   *(此指令會自動透過 Cloud Build 打包 Docker 映像檔並上傳至 Artifact Registry，最後部署至 Cloud Run，並自動輸出一個 HTTPS 連結供您使用)*
 
 ### ⚠️ Firebase Web 設定步驟
 網頁版需要特定的 Web 端 SDK 設定。
