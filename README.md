@@ -69,6 +69,19 @@ flutter build web
    docker run -d -p 80:80 --name lemon halion0329/lemon:latest
    ```
 
+### ☁️ Google Cloud Run 部署
+專案支援直接部署至 Google Cloud Run (無伺服器託管環境)。當您的 GCP 帳戶完成帳單（Billing）啟用與入帳後，可執行以下指令進行一鍵部署：
+
+1. **確認已切換至目標專案**：
+   ```bash
+   gcloud config set project cke101-07
+   ```
+2. **執行部署指令**：
+   ```bash
+   gcloud run deploy lemon --source . --region asia-east1 --port 80 --allow-unauthenticated
+   ```
+   *(此指令會自動透過 Cloud Build 打包 Docker 映像檔並上傳至 Artifact Registry，最後部署至 Cloud Run，並自動輸出一個 HTTPS 連結供您使用)*
+
 ### ⚠️ Firebase Web 設定步驟
 網頁版需要特定的 Web 端 SDK 設定。
 1. 開啟 [Firebase Console](https://console.firebase.google.com/)。
